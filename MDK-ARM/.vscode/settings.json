@@ -1,0 +1,18 @@
+{
+    "files.encoding": "gbk",
+    "files.associations": {
+        "usart.h": "c",
+        "tim.h": "c",
+        "main.h": "c",
+        "stm32f4xx_hal.h": "c",
+        "pid.h": "c",
+        "math.h": "c",
+        "memory": "c",
+        "string": "c",
+        "initializer_list": "c",
+        "xmemory": "c",
+        "xstring": "c",
+        "xutility": "c",
+        "uartpack.h": "c"
+    }
+}

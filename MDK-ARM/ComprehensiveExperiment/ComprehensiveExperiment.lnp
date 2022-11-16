@@ -5,6 +5,7 @@
 "comprehensiveexperiment\main.o"
 "comprehensiveexperiment\gpio.o"
 "comprehensiveexperiment\adc.o"
+"comprehensiveexperiment\dma.o"
 "comprehensiveexperiment\tim.o"
 "comprehensiveexperiment\usart.o"
 "comprehensiveexperiment\stm32f4xx_it.o"

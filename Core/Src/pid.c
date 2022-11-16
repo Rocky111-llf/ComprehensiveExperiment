@@ -16,7 +16,7 @@ float volte_change(float volte, uint8_t type)
 	}
 }
 // PID初始化函数
-void PID_Init(PID *pid, float p, float i, float d, float maxI, float maxOut, float MAX_volte)
+void PID_Init(PID *pid, float p, float i, float d, float maxI, float maxOut, float MAX_volte, float init_target)
 {
 	pid->kp = p;
 	pid->ki = i;
@@ -24,7 +24,7 @@ void PID_Init(PID *pid, float p, float i, float d, float maxI, float maxOut, flo
 	pid->maxIntegral = maxI;
 	pid->maxOutput = maxOut;
 	pid->MAX_volte = MAX_volte;
-	pid->target_volte = 0;
+	pid->target_volte = init_target;
 }
 
 //单级PID计算，需要传入的参数，PID结构体，目标值，反馈值,采用位置型PID

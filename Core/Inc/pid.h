@@ -12,7 +12,7 @@ typedef struct _PID
 	float integral, maxIntegral; //积分量和积分的限幅
 	float output, maxOutput;	 // PID的输出量和PID的最大输出量
 	float MAX_volte;			 //输出最大电压
-	float target_volte;          //目标电压值
+	float target_volte;			 //目标电压值
 } PID;
 typedef struct _AnglePID
 {
@@ -22,7 +22,7 @@ typedef struct _AnglePID
 
 } AnglePID;
 
-void PID_Init(PID *pid, float p, float i, float d, float maxI, float maxOut, float MAX_volte);
+void PID_Init(PID *pid, float p, float i, float d, float maxI, float maxOut, float MAX_volte, float init_target);
 void PID_SingleCalc(PID *pid, float reference, float feedback);
 void PID_AngleCalc(AnglePID *pid, float target_angle, int32_t total_angle, float speed);
 float volte_change(float volte, uint8_t type);

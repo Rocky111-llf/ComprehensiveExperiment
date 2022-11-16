@@ -20,6 +20,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "adc.h"
+#include "dma.h"
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
@@ -57,7 +58,8 @@ void test_task(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-uint32_t adc_volte[10];
+uint32_t adc_volte[50];
+uint32_t adc_average;
 PID pid;
 uart_o_ctrl_t uart1;
 /* USER CODE END 0 */
@@ -93,20 +95,28 @@ int main(void)
 	MX_TIM1_Init();
 	MX_TIM6_Init();
 	MX_USART1_UART_Init();
+	MX_DMA_Init();
 	MX_ADC2_Init();
 	/* USER CODE BEGIN 2 */
-	PID_Init(&pid, 0.56, 0.33, 0.01, 1000, 799, 10);
+	// PID_Init(&pid, 0.56, 0.33, 0.01, 1000, 799, 10, 3.3);
+	PID_Init(&pid, 0.58, 0.24, 0.01, 1000, 799, 10, 3.3);
 	Enable_Uart_O_Control(&huart1, &uart1);
 	/* USER CODE END 2 */
 
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */
-	HAL_ADC_Start(&hadc2);
+	HAL_ADC_Start_DMA(&hadc2, adc_volte, 50);
 	TIM6_START_IT();
 	pwm_start();
+	uint8_t i = 0;
 	while (1)
-	{
-		test_task();
+	{	
+		for(i=0;i<50;i++)
+		{
+			adc_average += adc_volte[i];
+		}
+		adc_average /= 50;
+		HAL_Delay(5);
 		/* USER CODE END WHILE */
 
 		/* USER CODE BEGIN 3 */

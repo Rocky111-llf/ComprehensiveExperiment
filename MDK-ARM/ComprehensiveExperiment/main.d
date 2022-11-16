@@ -39,6 +39,7 @@ comprehensiveexperiment\main.o: ../Core/Inc/main.h
 comprehensiveexperiment\main.o: E:\MDK5\ARM\ARMCC\Bin\..\include\stdio.h
 comprehensiveexperiment\main.o: ../Core/Inc/pid.h
 comprehensiveexperiment\main.o: ../Core/Inc/adc.h
+comprehensiveexperiment\main.o: ../Core/Inc/dma.h
 comprehensiveexperiment\main.o: ../Core/Inc/tim.h
 comprehensiveexperiment\main.o: ../Core/Inc/usart.h
 comprehensiveexperiment\main.o: ../Core/Inc/gpio.h

@@ -52,6 +52,7 @@ extern "C" {
 
 extern uint32_t adc_volte[];
 extern PID pid;
+extern uint32_t adc_average;
 /* USER CODE END EM */
 
 /* Exported functions prototypes ---------------------------------------------*/

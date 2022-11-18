@@ -8,11 +8,11 @@ float volte_change(float volte, uint8_t type)
 	// type:1,把0-3.3V转换为3.3-10V
 	if (type == 0)
 	{
-		return (float)volte * (43.0 / 105 - 22.0 / 121);
+		return (float)(volte - 0.0127f) / 4.5605f;
 	}
 	else
 	{
-		return (float)volte / (43.0 / 105 - 22.0 / 121);
+		return (float)volte * 4.5605f + 0.0127f;
 	}
 }
 // PID初始化函数
@@ -32,7 +32,7 @@ void PID_SingleCalc(PID *pid, float reference, float feedback)
 {
 	static uint16_t inl_index = 0;
 	reference = volte_change(reference, 0);
-	pid->error = (reference - feedback) * 800.0f / 2.27f; //更新当前误差
+	pid->error = (reference - feedback) * 800.0f / 2.1899f; //更新当前误差
 	//下面分别是P，I，D的计算
 	pid->output = pid->error * pid->kp; // P为根据当前误差计算输出量
 	if (fabs(pid->error) > 2)

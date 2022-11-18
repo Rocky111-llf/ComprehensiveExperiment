@@ -19,7 +19,7 @@
 
 
 //static char sendBuff[64];  //缓冲区
-//static int sendLen = 0;    //发送计数
+//                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       static int sendLen = 0;    //发送计数
 
 /**
  * @brief Enable a Overtime UART controller, call once before using UART

@@ -256,6 +256,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	static uint8_t count1;
 	static uint8_t count2;
 	static float temp;
+	static uint32_t temp2;
 	count1++;
 	Uart_O_Timeout_Check(&huart1, &uart1);
 	if (htim->Instance == TIM6)
@@ -264,7 +265,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		// 中断周期10ms
 		// 读取ADC数据,并发送至串口
 		// HAL_ADC_PollForConversion(&hadc2, 3);
-		printf("%.2f\r\n", volte_change(adc_average * 3.3 / 4096, 1));
+		// printf("%.2f\r\n", volte_change(adc_average * 3.3 / 4096, 1));
+		// printf("%.2f\r\n", (float)(adc_average * 3.3 / 4096));
+		printf("t5.txt=\"%.2f\"\xff\xff\xff", volte_change(adc_average * 3.3 / 4096, 1));
+		// printf("t0.txt=\"%.2f\"\xff\xff\xff", 8.8f);
 		if (count2 == 1)
 		{
 			PID_SingleCalc(&pid, pid.target_volte, adc_average * 3.3 / 4096);
@@ -300,6 +304,15 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 			{
 				pid.target_volte = temp;
 				// printf("!volte:%f\r\n", pid.target_volte);
+			}
+			else if (uart1.rxSaveBuf[0] == 'o' && uart1.rxSaveBuf[1] == 'k')
+			{
+				printf("ok.en=1\xff\xff\xff");
+			}
+			else if (sscanf((char *)uart1.rxSaveBuf, "volte2:%d", &temp2) == 1)
+			{
+				pid.target_volte = (float)temp2 / 10.0f;
+				// printf("!volte2:%f\r\n", pid.target_volte);
 			}
 		}
 	}
